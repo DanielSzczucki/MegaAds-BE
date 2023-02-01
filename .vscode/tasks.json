@@ -1,0 +1,13 @@
+{
+  "versiion": "2.0.0",
+  "tasks": [
+    {
+      "label": "typescript",
+      "type": "typescript",
+      "tsconfig": "tsconfig.json",
+      "option": "watch",
+      "auto": "true",
+      "problemMatcher": ["$tsc-watch"]
+    }
+  ]
+}
