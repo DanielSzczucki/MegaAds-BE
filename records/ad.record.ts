@@ -1,10 +1,10 @@
-import { AdEntity } from "../types";
+import { FieldPacket } from "mysql2";
+import { AdEntity, NewAdEntity } from "../types";
+import { pool } from "../utils/db";
 import { ValidationError } from "../utils/errors";
 
-//tworzymy interface dodawania, w którym zrobimy id na nie wymagane
-interface NewAdEntity extends Omit<AdEntity, "id"> {
-  id?: string;
-}
+//typ potrzebny do iokreslenia rezultatu zwracanego z db w getOne
+type AdRecordResult = [AdEntity[], FieldPacket[]];
 
 //robimy sobie typy do tej klasy
 //nie musimy pisać public- jest domyslnie
@@ -48,11 +48,24 @@ export class AdRecord implements AdEntity {
       throw new ValidationError("Nie mozna zlokalizować ogłoszenia");
     }
     //jak wszystko pójdzie ok to przypisujemy wartości obiektu i klasy
+    this.id = obj.id;
     this.name = obj.name;
     this.description = obj.description;
     this.price = obj.price;
     this.url = obj.url;
     this.lat = obj.lat;
     this.lon = obj.lon;
+  }
+
+  //statyczna metoda pobierz jeden rekord wg id
+  static async getOne(id: string): Promise<AdRecord | null> {
+    const [results] = (await pool.execute(
+      "SELECT * FROM `ads` WHERE id = :id",
+      {
+        id,
+      }
+    )) as AdRecordResult; //musimy tak zrobic zęby ts dal spokój
+
+    return results.length === 0 ? null : new AdRecord(results[0]);
   }
 }
