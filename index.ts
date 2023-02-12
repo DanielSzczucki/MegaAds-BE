@@ -14,22 +14,17 @@ app.use(
   })
 );
 
-app.use(json());
+app.use(express.json());
 
 //zabezpieczenie na ilość pobranych danych w czasie
 app.use(
   rateLimit({
-    windowMs: 5 * 60 * 1000, // 15 minutes
+    windowMs: 50 * 60 * 1000, // 15 minutes
     max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
   })
 );
-
 //Routes
 app.use("/ad", adRouter);
-
-app.get("/", async (req, res) => {
-  throw new Error("Daamn!");
-});
 
 //globalna obsłóga błędów
 app.use(handleError);

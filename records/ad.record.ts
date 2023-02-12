@@ -19,7 +19,7 @@ export class AdRecord implements AdEntity {
   lon: number;
 
   constructor(obj: NewAdEntity) {
-    //dodajemy walidację
+    // dodajemy walidację
     if (!obj.name || obj.name.length > 100) {
       throw new ValidationError(
         "Nazwa ogłószenia nie może byc pusta i przekraczać 100 znaków"
@@ -28,7 +28,7 @@ export class AdRecord implements AdEntity {
 
     if (obj.description.length > 1000) {
       throw new ValidationError(
-        " Nazwa ogłoszenia nie może byc pusta, ani przekraczać 1000 znaki"
+        " Nazwa ogłoszenia nie może byc pusta, ani przekraczać 1000 znaków"
       );
     }
 
@@ -38,7 +38,7 @@ export class AdRecord implements AdEntity {
       );
     }
 
-    //@TOTO: Check if URL is valid
+    // @TOTO: Check if URL is valid
     if (!obj.url || obj.url.length > 100) {
       throw new ValidationError(
         "Link do ogłószenia nie może byc pusta i przekraczać 100 znaków"
@@ -48,7 +48,7 @@ export class AdRecord implements AdEntity {
     if (typeof obj.lat !== "number" || typeof obj.lon !== "number") {
       throw new ValidationError("Nie mozna zlokalizować ogłoszenia");
     }
-    //jak wszystko pójdzie ok to przypisujemy wartości obiektu i klasy
+    // jak wszystko pójdzie ok to przypisujemy wartości obiektu i klasy
     this.id = obj.id;
     this.name = obj.name;
     this.description = obj.description;
@@ -80,7 +80,11 @@ export class AdRecord implements AdEntity {
 
     return results.map((result) => {
       const { id, lat, lon } = result;
-      return { id, lat, lon };
+      return {
+        id,
+        lat,
+        lon,
+      };
     });
   }
 
@@ -88,11 +92,11 @@ export class AdRecord implements AdEntity {
     if (!this.id) {
       this.id = uuid();
     } else {
-      throw new Error("Cannot insert something that is arleady inserted");
+      throw new Error("Cannot insert something that is already inserted!");
     }
 
     await pool.execute(
-      "INSERT INTO `ads` (`id`, `name`, `description`, `price`, `url`, `lat`, `lon`) VALUES(:id, :name, :description, :price, :url, :lat, :lon)",
+      "INSERT INTO `ads`(`id`, `name`, `description`, `price`, `url`, `lat`, `lon`) VALUES (:id, :name, :description, :price, :url, :lat, :lon)",
       this
     );
   }

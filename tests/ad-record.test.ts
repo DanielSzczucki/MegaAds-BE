@@ -16,7 +16,7 @@ const defaultObj = {
 };
 
 //sprawdzamy obsłóge błędów
-test("Can build AdRecord", () => {
+test("Cant build AdRecord", () => {
   //tworzymy w tej funkcji nasz obiekt
   const ad = new AdRecord(defaultObj);
 
