@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express from "express";
 import cors from "cors";
 //poniżej dla sync errors
 import "express-async-errors";
