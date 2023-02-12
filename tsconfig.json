@@ -6,7 +6,11 @@
     "target": "es6",
     "downlevelIteration": true,
     "module": "CommonJS",
+<<<<<<< HEAD
     "lib": ["es6"],
+=======
+    "lib": ["es6",],
+>>>>>>> 880fdfa4908a3ede767cf0d53fb252ed8b424dda
     "outDir": "dist",
     "esModuleInterop": true,
     "experimentalDecorators": true,
