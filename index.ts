@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import cors from "cors";
 //poniżej dla sync errors
 import "express-async-errors";
@@ -24,8 +24,10 @@ app.use(
   })
 );
 //Routes
-app.use("/ad", adRouter);
+const router = Router();
 
+router.use("/ad", adRouter);
+app.use("/api", router);
 //globalna obsłóga błędów
 app.use(handleError);
 
