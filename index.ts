@@ -2,7 +2,7 @@ import express, { Router } from "express";
 import cors from "cors";
 //poniżej dla sync errors
 import "express-async-errors";
-import { ValidationError, handleError } from "./utils/errors";
+import { handleError } from "./utils/errors";
 import rateLimit from "express-rate-limit";
 import { adRouter } from "./routers/ad.router";
 import { config } from "./config/config";
