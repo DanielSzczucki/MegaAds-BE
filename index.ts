@@ -35,3 +35,5 @@ app.use(handleError);
 app.listen(3001, "0.0.0.0", () => [
   console.log("listening on 3001 at http://localhost:3001"),
 ]);
+
+module.exports = app;
